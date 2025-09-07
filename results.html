@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="results-section">
+  <h1>Scan Results for {{ target }}</h1>
+
+  {% if results %}
+  <table>
+    <tr>
+      <th>Port</th>
+      <th>Status</th>
+    </tr>
+    {% for r in results %}
+    <tr>
+      <td>{{ r.port if r.port != "-" else "-" }}</td>
+      <td>{{ r.status }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+  {% else %}
+  <p>No results found.</p>
+  {% endif %}
+
+  <div class="actions">
+    <a href="{{ url_for('scan') }}" class="btn btn-primary">🔍 New Scan</a>
+    <a href="{{ url_for('download_report') }}" class="btn btn-secondary">⬇ Download PDF</a>
+  </div>
+</section>
+{% endblock %}
